@@ -94,7 +94,7 @@ public class OpenCVUtilsJava {
      *
      * The image format is chosen based on the filename extension (see `imread()` in OpenCV documentation for the list of extensions).
      * Only 8-bit (or 16-bit in case of PNG, JPEG 2000, and TIFF) single-channel or
-     * 3-channel (with ‘BGR’ channel order) images can be saved using this function.
+     * 3-channel (with  channel order) images can be saved using this function.
      * If the format, depth or channel order is different, use Mat::convertTo() , and cvtColor() to convert it before saving.
      *
      * @param file file to save to. File name extension decides output image format.

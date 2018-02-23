@@ -5,7 +5,7 @@ name := "flandmark-demo"
 version := "1.2"
 
 // Version of Scala used by the project
-scalaVersion := "2.11.8"
+scalaVersion := "2.11.12"
 
 val javacppVersion = "1.2"
 
@@ -18,6 +18,7 @@ classpathTypes += "maven-plugin"
 lazy val platform = org.bytedeco.javacpp.Loader.getPlatform
 
 libraryDependencies ++= Seq(
+  "com.typesafe.akka" %% "akka-stream" % "2.5.9",
   "org.bytedeco" % "javacpp" % javacppVersion,
   "org.bytedeco" % "javacv" % javacppVersion,
   "org.bytedeco.javacpp-presets" % "flandmark" % ("1.07-" + javacppVersion) classifier "",
@@ -41,3 +42,16 @@ fork := true
 
 // Set the prompt (for this build) to include the project id.
 shellPrompt in ThisBuild := { state => "sbt:" + Project.extract(state).currentRef.project + "> " }
+
+// For Swing
+libraryDependencies := {
+  CrossVersion.partialVersion(scalaVersion.value) match {
+    // if scala 2.11+ is used, add dependency on scala-xml module
+    case Some((2, scalaMajor)) if scalaMajor >= 11 =>
+      libraryDependencies.value ++ Seq(
+        "org.scala-lang.modules" %% "scala-swing" % "2.0.2")
+    case _ =>
+      // or just libraryDependencies.value if you don't depend on scala-swing
+      libraryDependencies.value :+ "org.scala-lang" % "scala-swing" % scalaVersion.value
+  }
+}
