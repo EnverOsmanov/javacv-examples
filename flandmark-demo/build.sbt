@@ -7,7 +7,7 @@ version := "1.2"
 // Version of Scala used by the project
 scalaVersion := "2.11.12"
 
-val javacppVersion = "1.2"
+val javacppVersion = "1.4"
 
 scalacOptions ++= Seq("-unchecked", "-deprecation", "-optimize", "-Xlint")
 
@@ -18,13 +18,13 @@ classpathTypes += "maven-plugin"
 lazy val platform = org.bytedeco.javacpp.Loader.getPlatform
 
 libraryDependencies ++= Seq(
-  "com.typesafe.akka" %% "akka-stream" % "2.5.9",
+  "com.typesafe.akka" %% "akka-stream" % "2.5.10",
   "org.bytedeco" % "javacpp" % javacppVersion,
   "org.bytedeco" % "javacv" % javacppVersion,
   "org.bytedeco.javacpp-presets" % "flandmark" % ("1.07-" + javacppVersion) classifier "",
   "org.bytedeco.javacpp-presets" % "flandmark" % ("1.07-" + javacppVersion) classifier platform,
-  "org.bytedeco.javacpp-presets" % "opencv" % ("3.1.0-" + javacppVersion) classifier "",
-  "org.bytedeco.javacpp-presets" % "opencv" % ("3.1.0-" + javacppVersion) classifier platform
+  "org.bytedeco.javacpp-presets" % "opencv" % ("3.4.0-" + javacppVersion) classifier "",
+  "org.bytedeco.javacpp-presets" % "opencv" % ("3.4.0-" + javacppVersion) classifier platform
 )
 
 // Used for testing local builds and snapshots of JavaCPP/JavaCV
